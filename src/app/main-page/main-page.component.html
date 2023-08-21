@@ -1,0 +1,112 @@
+<div class="main-div">
+    <h1 class="main-title">
+      <mat-toolbar color="primary">
+        <span>PP Ong/Dinamik/Riwani Quotation System</span>
+      </mat-toolbar>
+    </h1>
+
+    <table class="input-table">
+        <tr>
+            <th>Item Name</th>
+            <th>Unit</th>
+            <th>Price (PP Ong)</th>
+            <th>Price (Dinamik)</th>
+            <th>Price (Riwani)</th>
+        </tr>
+        <tr *ngFor="let item of items" >
+            <th><mat-form-field class="item-name-input">
+                <mat-label>Name</mat-label>
+                <input matInput [(ngModel)]="item.itemname" (ngModelChange)="item.itemname = $event.toUpperCase()">
+              </mat-form-field></th>
+            <th><mat-form-field>
+                <mat-label>Unit</mat-label>
+                <input matInput placeholder="PC, 100GM" [(ngModel)]="item.itemunit" (ngModelChange)="item.itemunit = $event.toUpperCase()">
+              </mat-form-field></th>
+            <th><mat-form-field>
+                <mat-label>Price</mat-label>
+                <input matInput currencyMask placeholder="10.50" [(ngModel)]="item.ppongprice" [options]="{ prefix: '', thousands: ',', decimal: '.', align: 'left' }">
+              </mat-form-field></th>
+            <th><mat-form-field>
+                <mat-label>Price</mat-label>
+                <input matInput currencyMask placeholder="10.50" [(ngModel)]="item.dinamikprice" [options]="{ prefix: '', thousands: ',', decimal: '.', align: 'left' }">
+              </mat-form-field></th>
+            <th><mat-form-field>
+                <mat-label>Price</mat-label>
+                <input matInput currencyMask placeholder="10.50" [(ngModel)]="item.riwaniprice" [options]="{ prefix: '', thousands: ',', decimal: '.', align: 'left' }">
+              </mat-form-field></th>
+        </tr>
+    </table>
+
+    <div class="bottom-button-row">
+      <button mat-raised-button extended color="primary" (click)="addRow()">
+        <mat-icon>add</mat-icon>
+        New Row
+      </button>
+      <button mat-raised-button extended color="accent" (click)="printPage()">
+        <mat-icon>print</mat-icon>
+        Print
+      </button>
+      <button mat-raised-button extended color="warn" (click)="resetPage()">
+        <mat-icon>refresh</mat-icon>
+        Reset
+      </button>
+    </div>
+
+    <!--div class="bottom-button-row">
+      <button mat-raised-button color="primary" (click)="printPage('PP Ong')">Print PP Ong</button>
+      <button mat-raised-button color="accent" (click)="printPage('Dinamik')">Print Dinamik</button>
+      <button mat-raised-button color="warn" (click)="printPage('Riwani')">Print Riwani</button>
+    </div-->
+    
+</div>
+
+<div class="print-div">
+  <div id="ppong-print-page">
+    <h1 class="ppong-print-title">PERNIAGAAN PEMBEKAL ONG</h1>
+    <h3 class="ppong-details">23, Jalan Bendera Mahkota, Taman Bukit Bendera, 28400 Mentakab, Pahang.</h3>
+    <h3 class="ppong-details">Tel : 09-2772181     H/P : 019-9556548     Fax : 09-2777157</h3>
+    <h3 class="ppong-details">TAWARAN HARGA {{this.currYear}}</h3>
+  <table class="ppong-table">
+    <tr *ngFor="let item of items" >
+      <td class="ppong-item-id" [hidden]="!item.itemname">{{item.id}}</td>
+      <td class="ppong-item-name" [hidden]="!item.itemname">{{item.itemname}}</td>
+      <td class="ppong-item-price" [hidden]="!item.itemname">RM{{item.ppongprice}}/{{item.itemunit}}</td>
+    </tr>
+  </table>
+  </div>
+
+  <div id="dinamik-print-page">
+    <h1 class="dinamik-print-title">PEMBEKAL DINAMIK XKL</h1>
+    <p class="dinamik-details-1">(CA 0116205-X)<br>
+      No. 5, Tingkat Atas, Jalan Merbau, Taman Rimba,<br>
+      28400 Mentakab, Pahang Darul Makmur.<br>
+      Membekal : Alat Tulis, Bahan Bacaan, Kelengkapan Sukan, Baja, Alat Bantuan Mengajar, 
+      Alatan Timbang, Percetakan, Hardware, Ubat-Ubatan, Cenderamata, Alat Muzik.<br>
+      Tel / Fax : 09-2782205      H/P No. : 013-9445663
+    </p>
+    <h3 class="dinamik-details-2">TAWARAN HARGA {{this.currYear}}</h3>
+  <table class="dinamik-table">
+    <tr *ngFor="let item of items" >
+      <td class="dinamik-item-id" [hidden]="!item.itemname">{{item.id}}</td>
+      <td class="dinamik-item-name" [hidden]="!item.itemname">{{item.itemname}}</td>
+      <td class="dinamik-item-price" [hidden]="!item.itemname">RM{{item.dinamikprice}}/{{item.itemunit}}</td>
+    </tr>
+  </table>
+  </div>
+
+  <div id="riwani-print-page">
+    <h1 class="riwani-print-title">PERNIAGAAN RIWANI</h1>
+    <p class="riwani-details-1">No. 540, Jalan Air Putih,<br>
+      25300 Kuantan ,Pahang.<br>
+      Tel : 019-988126
+    </p>
+    <h3 class="riwani-details-2">TAWARAN HARGA {{this.currYear}}</h3>
+  <table class="riwani-table">
+    <tr *ngFor="let item of items" >
+      <td class="riwani-item-id" [hidden]="!item.itemname">{{item.id}}</td>
+      <td class="riwani-item-name" [hidden]="!item.itemname">{{item.itemname}}</td>
+      <td class="riwani-item-price" [hidden]="!item.itemname">RM{{item.riwaniprice}}/{{item.itemunit}}</td>
+    </tr>
+  </table>
+  </div>
+</div>
