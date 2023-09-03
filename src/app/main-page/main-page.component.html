@@ -50,6 +50,10 @@
         <mat-icon>refresh</mat-icon>
         Reset
       </button>
+      <button mat-raised-button extended color="primary" (click)="randomQuote()">
+        <mat-icon>attach_money</mat-icon>
+        Random Quote
+      </button>
     </div>
 
     <!--div class="bottom-button-row">
@@ -70,7 +74,7 @@
     <tr *ngFor="let item of items" >
       <td class="ppong-item-id" [hidden]="!item.itemname">{{item.id}}</td>
       <td class="ppong-item-name" [hidden]="!item.itemname">{{item.itemname}}</td>
-      <td class="ppong-item-price" [hidden]="!item.itemname">RM{{item.ppongprice}}/{{item.itemunit}}</td>
+      <td class="ppong-item-price" [hidden]="!item.itemname">RM{{item.ppongprice | number:'1.2-2'}}/{{item.itemunit}}</td>
     </tr>
   </table>
   </div>
@@ -89,7 +93,7 @@
     <tr *ngFor="let item of items" >
       <td class="dinamik-item-id" [hidden]="!item.itemname">{{item.id}}</td>
       <td class="dinamik-item-name" [hidden]="!item.itemname">{{item.itemname}}</td>
-      <td class="dinamik-item-price" [hidden]="!item.itemname">RM{{item.dinamikprice}}/{{item.itemunit}}</td>
+      <td class="dinamik-item-price" [hidden]="!item.itemname">RM{{item.dinamikprice | number:'1.2-2'}}/{{item.itemunit}}</td>
     </tr>
   </table>
   </div>
@@ -105,7 +109,7 @@
     <tr *ngFor="let item of items" >
       <td class="riwani-item-id" [hidden]="!item.itemname">{{item.id}}</td>
       <td class="riwani-item-name" [hidden]="!item.itemname">{{item.itemname}}</td>
-      <td class="riwani-item-price" [hidden]="!item.itemname">RM{{item.riwaniprice}}/{{item.itemunit}}</td>
+      <td class="riwani-item-price" [hidden]="!item.itemname">RM{{item.riwaniprice | number:'1.2-2'}}/{{item.itemunit}}</td>
     </tr>
   </table>
   </div>

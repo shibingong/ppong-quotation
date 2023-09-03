@@ -13,7 +13,7 @@ export class MainPageComponent implements OnInit {
 
   items: any[] = [];
 
-  constructor() { this.items = [{id: 1, itemname: '', itemunit: '', ppongprice: null, dinamikprice: null, riwaniprice: null}];}
+  constructor() { this.items = [{id: 1, itemname: '', itemunit: '', ppongprice: '', dinamikprice: '', riwaniprice: ''}];}
 
   ngOnInit(): void {
   }
@@ -36,5 +36,21 @@ export class MainPageComponent implements OnInit {
 
   resetPage(){
     location.reload();
+  }
+
+  randomQuote(){
+    this.items.forEach(element => {
+      if((element.itemname != '') && (element.itemunit != '')){
+        let rand1 = this.randomInteger(10,15);
+        let rand2 = this.randomInteger(10,15);
+
+        element.dinamikprice = Math.round(element.ppongprice * (100 + rand1)/100 / 0.1) * 0.1;
+        element.riwaniprice = Math.round(element.ppongprice * (100 + rand2)/100 / 0.1) * 0.1;
+      }
+    });
+  }
+
+  randomInteger(min: number, max: number) {
+    return Math.random() * (max - min + 1) + min;
   }
 }
