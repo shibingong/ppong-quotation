@@ -14,8 +14,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CurrencyMaskModule} from "ng2-currency-mask";
 
 @NgModule({
@@ -36,7 +37,9 @@ import {CurrencyMaskModule} from "ng2-currency-mask";
     MatIconModule,
     MatTooltipModule,
     MatToolbarModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

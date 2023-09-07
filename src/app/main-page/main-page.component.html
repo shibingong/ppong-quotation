@@ -5,7 +5,7 @@
       </mat-toolbar>
     </h1>
 
-    <table class="input-table">
+    <table class="input-table" id="table-input">
         <tr>
             <th>Item Name</th>
             <th>Unit</th>
@@ -16,11 +16,25 @@
         <tr *ngFor="let item of items" >
             <th><mat-form-field class="item-name-input">
                 <mat-label>Name</mat-label>
-                <input matInput [(ngModel)]="item.itemname" (ngModelChange)="item.itemname = $event.toUpperCase()">
+                <input #nameinput matInput [(ngModel)]="item.itemname" (ngModelChange)="item.itemname = $event.toUpperCase()" id="inputname">
+                <!--<input matInput [(ngModel)]="item.itemname" (ngModelChange)="item.itemname = $event.toUpperCase()" [formControl]="itemNameControl"
+                [matAutocomplete]="auto1">
+                <mat-autocomplete #auto1="matAutocomplete">
+                  <mat-option *ngFor="let option of itemList" [value]="option">
+                    {{option}}
+                 </mat-option>
+             </mat-autocomplete>-->
               </mat-form-field></th>
             <th><mat-form-field>
                 <mat-label>Unit</mat-label>
                 <input matInput placeholder="PC, 100GM" [(ngModel)]="item.itemunit" (ngModelChange)="item.itemunit = $event.toUpperCase()">
+                <!--<input matInput placeholder="PC, 100GM" [(ngModel)]="item.itemunit" (ngModelChange)="item.itemunit = $event.toUpperCase()" [formControl]="itemUnitControl"
+                [matAutocomplete]="auto2">
+                <mat-autocomplete #auto2="matAutocomplete">
+                  <mat-option *ngFor="let option2 of unitList" [value]="option2">
+                    {{option2}}
+                 </mat-option>
+             </mat-autocomplete>-->
               </mat-form-field></th>
             <th><mat-form-field>
                 <mat-label>Price</mat-label>
@@ -42,6 +56,10 @@
         <mat-icon>add</mat-icon>
         New Row
       </button>
+      <button mat-raised-button extended color="primary" (click)="randomQuote()">
+        <mat-icon>attach_money</mat-icon>
+        Random Quote
+      </button>
       <button mat-raised-button extended color="accent" (click)="printPage()">
         <mat-icon>print</mat-icon>
         Print
@@ -50,10 +68,7 @@
         <mat-icon>refresh</mat-icon>
         Reset
       </button>
-      <button mat-raised-button extended color="primary" (click)="randomQuote()">
-        <mat-icon>attach_money</mat-icon>
-        Random Quote
-      </button>
+      
     </div>
 
     <!--div class="bottom-button-row">
