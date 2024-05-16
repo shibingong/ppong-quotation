@@ -17,14 +17,16 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   itemUnitControl = new FormControl();
   unitList: string[] = ['250GM', '500GM', '500ML', 'KTK', 'PC', 'PKT', 'SET', 'UNIT'];*/
 
-  companyname = "PP Ong";
+  companyname: string = "PP Ong";
   dt = new Date(); 
   currYear = this.dt.getFullYear();
 
   items: any[] = [];
 
   constructor() { this.items = [{id: 1, itemname: '', itemunit: '', ppongprice: '', dinamikprice: '', riwaniprice: ''}];}
-
+  
+  needCent: boolean = false;
+  
   ngOnInit(): void {
   }
 
@@ -53,7 +55,6 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     });
   }
 
-
   resetPage(){
     location.reload();
   }
@@ -64,8 +65,8 @@ export class MainPageComponent implements OnInit, AfterViewInit {
         let rand1 = this.randomInteger(10,15);
         let rand2 = this.randomInteger(10,15);
 
-        element.dinamikprice = Math.round(element.ppongprice * (100 + rand1)/100/ 0.1) * 0.1;
-        element.riwaniprice = Math.round(element.ppongprice * (100 + rand2)/100/ 0.1) * 0.1;
+        element.dinamikprice = this.needCent ? Math.round(element.ppongprice * (100 + rand1)/100/ 0.1) * 0.1 : Math.round(element.ppongprice * (100 + rand1)/100);
+        element.riwaniprice = this.needCent ? Math.round(element.ppongprice * (100 + rand2)/100/ 0.1) * 0.1 : Math.round(element.ppongprice * (100 + rand2)/100);
       }
     });
   }
@@ -73,4 +74,9 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   randomInteger(min: number, max: number) {
     return Math.random() * (max - min + 1) + min;
   }
+
+  onToggleChange(event: any) {
+    this.needCent = event.checked;
+  }
+
 }

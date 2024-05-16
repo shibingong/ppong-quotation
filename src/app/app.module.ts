@@ -15,6 +15,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CurrencyMaskModule} from "ng2-currency-mask";
@@ -40,6 +41,7 @@ import {CurrencyMaskModule} from "ng2-currency-mask";
     CurrencyMaskModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
