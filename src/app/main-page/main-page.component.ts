@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, AfterViewInit, OnDestroy,QueryList, ElementRef } from '@angular/core';
+import { Component, ViewChildren, AfterViewInit, QueryList, ElementRef , ChangeDetectorRef} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 //import {takeWhile} from 'rxjs/operators';
@@ -8,7 +8,8 @@ import { FormControl } from '@angular/forms';
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })
-export class MainPageComponent implements OnInit, AfterViewInit {
+
+export class MainPageComponent implements AfterViewInit {
   @ViewChildren('nameinput')
   inputs!: QueryList<ElementRef>;
   /*itemNameControl = new FormControl();
@@ -23,19 +24,21 @@ export class MainPageComponent implements OnInit, AfterViewInit {
 
   items: any[] = [];
 
-  constructor() { this.items = [{id: 1, itemname: '', itemunit: '', ppongprice: '', dinamikprice: '', riwaniprice: ''}];}
+  constructor(private cd: ChangeDetectorRef) { 
+    this.items = [{id: 1, itemname: '', itemunit: '', ppongprice: '', dinamikprice: '', riwaniprice: ''}];
+  }
   
   needCent: boolean = false;
   
-  ngOnInit(): void {
-  }
-
   ngAfterViewInit(): void {
     this.inputs.last && this.inputs.last.nativeElement.focus();
+    this.cd.detectChanges();
 
     this.inputs.changes.subscribe(() => {
-      if (this.inputs.length)
+      if (this.inputs.length){
         this.inputs.last.nativeElement.focus();
+        this.cd.detectChanges();
+      }
     })
   }
 
@@ -62,17 +65,32 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   randomQuote(){
     this.items.forEach(element => {
       if((element.itemname != '') && (element.itemunit != '')){
-        let rand1 = this.randomInteger(10,15);
-        let rand2 = this.randomInteger(10,15);
+        let rand1 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
+        let rand2 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
+        
+        while (rand1 == rand2){
+          rand2 = this.randomInteger(10,15);
+        }
 
-        element.dinamikprice = this.needCent ? Math.round(element.ppongprice * (100 + rand1)/100/ 0.1) * 0.1 : Math.round(element.ppongprice * (100 + rand1)/100);
-        element.riwaniprice = this.needCent ? Math.round(element.ppongprice * (100 + rand2)/100/ 0.1) * 0.1 : Math.round(element.ppongprice * (100 + rand2)/100);
+        element.dinamikprice = this.generateFigure(this.needCent, element.ppongprice, rand1);
+        element.riwaniprice = this.generateFigure(this.needCent, element.ppongprice, rand2);
       }
     });
   }
 
   randomInteger(min: number, max: number) {
-    return Math.random() * (max - min + 1) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  generateFigure(cent: boolean, price: number, rand: number) {
+    let result:number;
+    if (cent){
+      result = Math.round(price * (100 + rand)/100) + (this.randomInteger(1,9)/10);
+    }
+    else{
+      result = Math.round(price * (100 + rand)/100);
+    }
+    return result;
   }
 
   onToggleChange(event: any) {

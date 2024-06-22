@@ -19,6 +19,8 @@ app-print-page {
   
     .print-div {
       display: block;
+      width: 50mm;
+      height: 50mm;
     }
   
     .main-div {

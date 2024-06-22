@@ -19,6 +19,8 @@
 
 .print-div{
     margin: auto;
+    width: 100vw;
+    height: 100vh;
 }
 
 .bottom-button-row {
