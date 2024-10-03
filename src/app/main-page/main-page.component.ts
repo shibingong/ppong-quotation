@@ -69,8 +69,10 @@ export class MainPageComponent implements AfterViewInit {
         let rand2 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
         
         while (rand1 == rand2){
-          rand2 = this.randomInteger(10,15);
+          rand2 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
         }
+
+        this.needCent = (element.ppongprice <= 10)? true : false;
 
         element.dinamikprice = this.generateFigure(this.needCent, element.ppongprice, rand1);
         element.riwaniprice = this.generateFigure(this.needCent, element.ppongprice, rand2);
