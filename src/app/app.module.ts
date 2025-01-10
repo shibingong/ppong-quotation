@@ -20,6 +20,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CurrencyMaskModule} from "ng2-currency-mask";
 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +45,8 @@ import {CurrencyMaskModule} from "ng2-currency-mask";
     MatAutocompleteModule,
     ReactiveFormsModule,
     MatSlideToggleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

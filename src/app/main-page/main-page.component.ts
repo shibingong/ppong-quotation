@@ -1,5 +1,6 @@
 import { Component, ViewChildren, AfterViewInit, QueryList, ElementRef , ChangeDetectorRef} from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { DateAdapter } from '@angular/material/core';
 
 //import {takeWhile} from 'rxjs/operators';
 
@@ -19,7 +20,7 @@ export class MainPageComponent implements AfterViewInit {
   unitList: string[] = ['250GM', '500GM', '500ML', 'KTK', 'PC', 'PKT', 'SET', 'UNIT'];*/
 
   companyname: string = "PP Ong";
-  dt = new Date(); 
+  dt: Date = new Date(); 
   currYear = this.dt.getFullYear();
 
   items: any[] = [];
@@ -98,5 +99,4 @@ export class MainPageComponent implements AfterViewInit {
   onToggleChange(event: any) {
     this.needCent = event.checked;
   }
-
 }

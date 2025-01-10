@@ -4,6 +4,12 @@
         <span>PP Ong/Dinamik/Riwani Quotation System</span>
       </mat-toolbar>
     </h1>
+    <div class="year-input-container">
+      <mat-form-field>
+        <mat-label>Year</mat-label>
+        <input matInput type="number" [(ngModel)]="currYear" placeholder="Enter year" class="year-input" />
+      </mat-form-field>
+    </div>
 
     <table class="input-table" id="table-input">
         <tr>
@@ -17,24 +23,10 @@
             <th><mat-form-field class="item-name-input">
                 <mat-label>Name</mat-label>
                 <input #nameinput matInput [(ngModel)]="item.itemname" (ngModelChange)="item.itemname = $event.toUpperCase()" id="inputname">
-                <!--<input matInput [(ngModel)]="item.itemname" (ngModelChange)="item.itemname = $event.toUpperCase()" [formControl]="itemNameControl"
-                [matAutocomplete]="auto1">
-                <mat-autocomplete #auto1="matAutocomplete">
-                  <mat-option *ngFor="let option of itemList" [value]="option">
-                    {{option}}
-                 </mat-option>
-             </mat-autocomplete>-->
               </mat-form-field></th>
             <th><mat-form-field>
                 <mat-label>Unit</mat-label>
                 <input matInput placeholder="PC, 100GM" [(ngModel)]="item.itemunit" (ngModelChange)="item.itemunit = $event.toUpperCase()">
-                <!--<input matInput placeholder="PC, 100GM" [(ngModel)]="item.itemunit" (ngModelChange)="item.itemunit = $event.toUpperCase()" [formControl]="itemUnitControl"
-                [matAutocomplete]="auto2">
-                <mat-autocomplete #auto2="matAutocomplete">
-                  <mat-option *ngFor="let option2 of unitList" [value]="option2">
-                    {{option2}}
-                 </mat-option>
-             </mat-autocomplete>-->
               </mat-form-field></th>
             <th><mat-form-field>
                 <mat-label>Price</mat-label>
