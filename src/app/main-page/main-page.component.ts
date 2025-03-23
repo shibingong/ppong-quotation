@@ -26,7 +26,7 @@ export class MainPageComponent implements AfterViewInit {
   items: any[] = [];
 
   constructor(private cd: ChangeDetectorRef) { 
-    this.items = [{id: 1, itemname: '', itemunit: '', ppongprice: '', dinamikprice: '', riwaniprice: ''}];
+    this.items = [{id: 1, itemname: '', itemunit: '', ppongprice: '', dinamikprice: '', riwaniprice: '', pcsprice: ''}];
   }
   
   needCent: boolean = false;
@@ -55,7 +55,8 @@ export class MainPageComponent implements AfterViewInit {
       itemunit: '',
       ppongprice: '',
       dinamikprice: '',
-      riwaniprice: ''
+      riwaniprice: '',
+      pcsprice: ''
     });
   }
 
@@ -68,15 +69,20 @@ export class MainPageComponent implements AfterViewInit {
       if((element.itemname != '') && (element.itemunit != '')){
         let rand1 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
         let rand2 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
+        let rand3 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
         
         while (rand1 == rand2){
           rand2 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
+        }
+        while (rand2 == rand3){
+          rand3 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
         }
 
         this.needCent = (element.ppongprice <= 10)? true : false;
 
         element.dinamikprice = this.generateFigure(this.needCent, element.ppongprice, rand1);
         element.riwaniprice = this.generateFigure(this.needCent, element.ppongprice, rand2);
+        element.pcsprice = this.generateFigure(this.needCent, element.ppongprice, rand3);
       }
     });
   }
