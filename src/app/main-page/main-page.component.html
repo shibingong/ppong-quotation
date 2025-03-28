@@ -1,7 +1,7 @@
 <div class="main-div">
     <h1 class="main-title">
       <mat-toolbar color="primary">
-        <span>PP Ong/Dinamik/Riwani/C.S. Quotation System</span>
+        <span>PP Ong/Dinamik/Riwani Quotation System</span>
       </mat-toolbar>
     </h1>
     <div class="year-input-container">
@@ -15,10 +15,10 @@
         <tr>
             <th>Item Name</th>
             <th>Unit</th>
-            <th>Price (PP Ong)</th>
+            <th *ngIf="isPPOng">Price (PP Ong)</th>
+            <th *ngIf="!isPPOng">Price (C. S.)</th>
             <th>Price (Dinamik)</th>
             <th>Price (Riwani)</th>
-            <th>Price (Pembekalan C.S.)</th>
         </tr>
         <tr *ngFor="let item of items" >
             <th><mat-form-field class="item-name-input">
@@ -41,10 +41,6 @@
                 <mat-label>Price</mat-label>
                 <input matInput currencyMask placeholder="10.50" [(ngModel)]="item.riwaniprice" [options]="{ prefix: '', thousands: ',', decimal: '.', align: 'left' }">
               </mat-form-field></th>
-            <th><mat-form-field>
-                <mat-label>Price</mat-label>
-                <input matInput currencyMask placeholder="10.50" [(ngModel)]="item.pcsprice" [options]="{ prefix: '', thousands: ',', decimal: '.', align: 'left' }">
-              </mat-form-field></th>
         </tr>
     </table>
 
@@ -65,7 +61,8 @@
         <mat-icon>refresh</mat-icon>
         Reset
       </button>
-      <div id="cent-tgl-btn"><mat-slide-toggle disabled id="cent-tgl-btn2" [(ngModel)]="needCent" (change)="onToggleChange($event)">Need cent?</mat-slide-toggle></div>
+      <div id="cent-tgl-btn"><mat-slide-toggle disabled id="cent-tgl-btn2" [(ngModel)]="needCent" (change)="onCentToggleChange($event)">Need cent?</mat-slide-toggle></div>
+      <div id="cent-tgl-btn"><mat-slide-toggle id="cent-tgl-btn2" [(ngModel)]="isPPOng" (change)="onPPOngToggleChange($event)">PPOng?</mat-slide-toggle></div>
     </div>
 
     <!--div class="bottom-button-row">
@@ -78,9 +75,12 @@
 
 <div class="print-div">
   <div id="ppong-print-page">
-    <h1 class="ppong-print-title">PERNIAGAAN PEMBEKAL ONG</h1>
-    <h3 class="ppong-details">23, Jalan Bendera Mahkota, Taman Bukit Bendera, 28400 Mentakab, Pahang.</h3>
-    <h3 class="ppong-details">Tel : 09-2772181     H/P : 019-9556548     Fax : 09-2777157</h3>
+    <h1 *ngIf="isPPOng" class="ppong-print-title">PERNIAGAAN PEMBEKAL ONG</h1>
+    <h3 *ngIf="isPPOng" class="ppong-details">23, Jalan Bendera Mahkota, Taman Bukit Bendera, 28400 Mentakab, Pahang.</h3>
+    <h3 *ngIf="isPPOng" class="ppong-details">Tel : 09-2772181     H/P : 019-9556548     Fax : 09-2777157</h3>
+    <h1 *ngIf="!isPPOng" class="ppong-print-title">PEMBEKALAN C.S.</h1>
+    <h3 *ngIf="!isPPOng" class="ppong-details">17, Jalan Kelapa Puyuh, Taman Soga, 83000 Batu Pahat Johor.</h3>
+    <h3 *ngIf="!isPPOng" class="ppong-details">Tel/Fax : 07-4316914     H/P : 019-9881266</h3>
     <h3 class="ppong-details">TAWARAN HARGA {{this.currYear}}</h3>
   <table class="ppong-table">
     <tr *ngFor="let item of items" >
@@ -125,26 +125,4 @@
     </tr>
   </table>
   </div>
-
-  <div id="cs-print-page">
-    <h1 class="cs-print-title">PEMBEKALAN C.S.</h1>
-    <p class="cs-details">17, Jalan Kelapa Puyuh, Taman Soga, 83000 Batu Pahat, Johor.<br>
-      Tel / Fax : 09-2782205      H/P No. : 013-9445663<br>
-      (NO. PENDAFTARAN: K. KEW/K & B/D/02/494/357-034009)<br>
-      <i>Penjual alatan makmal sains, alatan bantuan mengajar, <br> 
-      alatan pusat sumber (APD) & alatan am.</i>
-    </p>
-    <h3 class="cs-details">TAWARAN HARGA {{this.currYear}}</h3>
-  <table class="cs-table">
-    <tr *ngFor="let item of items" >
-      <td class="cs-item-id
-      " [hidden]="!item.itemname">{{item.id}}</td>
-      <td class="cs-item-name
-      " [hidden]="!item.itemname">{{item.itemname}}</td>
-      <td class="cs-item-price
-      " [hidden]="!item.itemname">RM{{item.pcsprice | number:'1.2-2'}}/{{item.itemunit}}</td>
-    </tr>
-  </table>
-  </div>
-
 </div>

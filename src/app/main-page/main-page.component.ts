@@ -26,10 +26,11 @@ export class MainPageComponent implements AfterViewInit {
   items: any[] = [];
 
   constructor(private cd: ChangeDetectorRef) { 
-    this.items = [{id: 1, itemname: '', itemunit: '', ppongprice: '', dinamikprice: '', riwaniprice: '', pcsprice: ''}];
+    this.items = [{id: 1, itemname: '', itemunit: '', ppongprice: '', dinamikprice: '', riwaniprice: ''}];
   }
   
   needCent: boolean = false;
+  isPPOng: boolean = true;
   
   ngAfterViewInit(): void {
     this.inputs.last && this.inputs.last.nativeElement.focus();
@@ -55,8 +56,7 @@ export class MainPageComponent implements AfterViewInit {
       itemunit: '',
       ppongprice: '',
       dinamikprice: '',
-      riwaniprice: '',
-      pcsprice: ''
+      riwaniprice: ''
     });
   }
 
@@ -69,20 +69,15 @@ export class MainPageComponent implements AfterViewInit {
       if((element.itemname != '') && (element.itemunit != '')){
         let rand1 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
         let rand2 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
-        let rand3 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
         
         while (rand1 == rand2){
           rand2 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
-        }
-        while (rand2 == rand3){
-          rand3 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
         }
 
         this.needCent = (element.ppongprice <= 10)? true : false;
 
         element.dinamikprice = this.generateFigure(this.needCent, element.ppongprice, rand1);
         element.riwaniprice = this.generateFigure(this.needCent, element.ppongprice, rand2);
-        element.pcsprice = this.generateFigure(this.needCent, element.ppongprice, rand3);
       }
     });
   }
@@ -102,7 +97,11 @@ export class MainPageComponent implements AfterViewInit {
     return result;
   }
 
-  onToggleChange(event: any) {
+  onCentToggleChange(event: any) {
     this.needCent = event.checked;
+  }
+
+  onPPOngToggleChange(event: any) {
+    this.isPPOng = event.checked;
   }
 }
