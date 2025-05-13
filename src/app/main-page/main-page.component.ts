@@ -67,13 +67,11 @@ export class MainPageComponent implements AfterViewInit {
   randomQuote(){
     this.items.forEach(element => {
       if((element.itemname != '') && (element.itemunit != '')){
-        let rand1 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
-        let rand2 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
+        let rand1 = (element.ppongprice > 20)? this.randomInteger(15,20) : this.randomInteger(20,30);
+        let rand2 = this.randomAddOrSubtract(rand1);
         
-        while (rand1 == rand2){
-          rand2 = (element.ppongprice > 20)? this.randomInteger(10,15) : this.randomInteger(20,30);
-        }
-
+        console.log('rand1: ' + rand1);
+        console.log('rand2: ' + rand2);
         this.needCent = (element.ppongprice <= 10)? true : false;
 
         element.dinamikprice = this.generateFigure(this.needCent, element.ppongprice, rand1);
@@ -84,6 +82,12 @@ export class MainPageComponent implements AfterViewInit {
 
   randomInteger(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  randomAddOrSubtract(input: number) {
+    const shouldAdd = Math.random() < 0.5;
+    const b = 5;
+    return shouldAdd ? input + b : input - b;
   }
 
   generateFigure(cent: boolean, price: number, rand: number) {
