@@ -67,7 +67,7 @@ export class MainPageComponent implements AfterViewInit {
   randomQuote(){
     this.items.forEach(element => {
       if((element.itemname != '') && (element.itemunit != '')){
-        let rand1 = (element.ppongprice > 20)? this.randomInteger(15,20) : this.randomInteger(20,30);
+        let rand1 = (element.ppongprice > 20)? 10 : this.randomInteger(20,30);
         let rand2 = this.randomAddOrSubtract(rand1);
         
         console.log('rand1: ' + rand1);
